@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# forked from: BrainFcuksec
 # Program: gh0st.sh
 # Version: 5.0.1
 # Operating System: debian bsed(any)
@@ -146,7 +147,7 @@ function deactivate_macchanger {
 
 function notify {
 	if [ -e /usr/bin/notify-send ]; then
-		/usr/bin/notify-send "AnonSurf" "$1"
+		/usr/bin/notify-send "gh0st" "$1"
 	fi
 }
 
