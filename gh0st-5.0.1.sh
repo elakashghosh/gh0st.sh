@@ -56,7 +56,7 @@ bleach_clean="bash.history system.cache system.clipboard system.custom system.re
 overwrite="true"
 
 #net_int
-net_int="eth0"
+net_int="wlan0"
 
 # print banner
 function banner {
