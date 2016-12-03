@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# forked from: BrainFcuksec
 # Program: gh0st.sh
 # Version: 5.0.1
 # Operating System: debian bsed(any)
@@ -144,7 +143,7 @@ function deactivate_macchanger {
 	notify "orginal mac restored" 
 }
 
-
+# function for notify
 function notify {
 	if [ -e /usr/bin/notify-send ]; then
 		/usr/bin/notify-send "gh0st" "$1"
@@ -192,6 +191,13 @@ function do_bleachbit {
 
 # install dependencies
 function install {
+    check_root
+	printf "${white}
+enjoy the frEEdom .!..
+
+Version: $version
+Author: mr. ey3\n"
+	check_root
 	sudo echo "deb http://deb.torproject.org/torproject.org jessie main" >>/etc/apt/sources.list.d/tor.list
     sudo echo "deb-src http://deb.torproject.org/torproject.org jessie main" >>/etc/apt/sources.list.d/tor.list
     sudo gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89
@@ -336,8 +342,8 @@ fi
 # start transparent proxy
 # start program
 function start {
-    check_root
     banner
+    check_root
     kill_process
     change_hostname
     check_default
@@ -353,7 +359,7 @@ function start {
 
     # check status of tor.service and stop it if is active
     if systemctl is-active tor.service > /dev/null 2>&1; then
-        systemctl stop tor.service
+        service tor stop
     fi
 
     printf "\n${blue}%s${endc} ${green}%s${endc}\n" "::" "Starting gh0st protocol"
@@ -438,6 +444,7 @@ function start {
 # stop transparent proxy and return to clearnet
 function stop {
     check_root
+    banner
 
     printf "${blue}%s${endc} ${green}%s${endc}\n" "::" "deactivating gh0st"
     sleep 2
@@ -474,6 +481,7 @@ function stop {
 # function for check status of program and services:
 # tor.service, check public IP, netstat for open door
 function check_status {
+	banner
     check_root
 
     # check status of tor.service
@@ -500,6 +508,7 @@ function check_status {
 
 # check current public IP
 function check_ip {
+	banner
     printf "\n${blue}%s${endc} ${green}%s${endc}\n" "::" "Checking your public IP, please wait..."
     local ext_ip
     ext_ip=$(wget -qO- -t 1 --timeout=15 ipinfo.io/ip)
@@ -513,8 +522,8 @@ function check_ip {
     
 # restart tor.service and change IP
 function restart {
+	banner
     check_root
-    printf "${blue}%s${endc} ${green}%s${endc}\n" "::" "Restart Tor service and change IP"
 
     # systemctl restart or stop/start is the same?
     sudo service tor stop
@@ -536,6 +545,7 @@ function restart {
 
 # display program and tor version then exit
 function print_version {
+	banner
     printf "${white}%s${endc}\n" "$program version $version"
     printf "${white}%s${endc}\n" "$(tor --version)"
     exit 0
