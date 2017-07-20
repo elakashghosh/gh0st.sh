@@ -1,3 +1,5 @@
+## Currently this script is not working due to a bug which i'll fix in some time stay tuned
+## This script is up for the developers 
 # gh0st.sh
 
 This script is made for "WHOLE OS ANONYMIZATION USING TOR" for debian based os.
